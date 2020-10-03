@@ -4,5 +4,7 @@
     <qresource>
         <!-- App icon -->
         <file>res/logo/app.svg</file>
+        <!-- Custom style -->
+        <file>res/style/Dark.qss</file>
     </qresource>
 </RCC>
