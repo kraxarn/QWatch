@@ -6,5 +6,6 @@
         <file>res/logo/app.svg</file>
         <!-- Custom style -->
         <file>res/style/Dark.qss</file>
+        <file>res/font/NotoSans-Regular.ttf</file>
     </qresource>
 </RCC>

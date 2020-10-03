@@ -6,8 +6,13 @@ MainWindow::MainWindow(QWidget *parent)
 	// Custom dark theme
 	QFile styleFile(":/res/style/Dark.qss");
 	styleFile.open(QIODevice::ReadOnly);
+	QApplication::setStyle("fusion");
 	setStyleSheet(styleFile.readAll());
 	styleFile.close();
+
+	// Custom font
+	QFontDatabase::addApplicationFont(":/res/font/NotoSans-Regular.ttf");
+	QApplication::setFont(QFont("Noto Sans Regular", QApplication::font().pointSize()));
 
 	// Window properties
 	setWindowIcon(Icon::get("logo:app"));

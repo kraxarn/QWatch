@@ -6,6 +6,8 @@
 #include <QMediaPlayer>
 #include <QVideoWidget>
 #include <QFile>
+#include <QApplication>
+#include <QFontDatabase>
 
 class MainWindow : public QMainWindow
 {
