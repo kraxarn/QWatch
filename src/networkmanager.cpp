@@ -24,7 +24,15 @@ QByteArray NetworkManager::get(const QString &url)
 
 QJsonDocument NetworkManager::getJson(const QString &url)
 {
-	return QJsonDocument::fromJson(get(url));
+	auto json = QJsonDocument::fromJson(get(url));
+
+	if (json.isObject() && json.object().contains("error"))
+	{
+		QMessageBox::warning((QWidget *) parent(), "Network error",
+			json.object()["error"].toString());
+	}
+
+	return json;
 }
 
 QPixmap NetworkManager::getThumbnail(const QString &id)

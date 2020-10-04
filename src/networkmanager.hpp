@@ -9,6 +9,8 @@
 #include <QPixmap>
 #include <QStandardPaths>
 #include <QDir>
+#include <QJsonObject>
+#include <QMessageBox>
 
 class NetworkManager: QNetworkAccessManager
 {

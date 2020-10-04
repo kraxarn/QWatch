@@ -20,12 +20,16 @@ Q_OBJECT
 public:
 	explicit ContextWindow(QWidget *parent);
 
+signals:
+	void playMedia(const QString &videoUrl, const QString &audioUrl);
+
 private:
 	NetworkManager *networkManager;
 	QTreeWidget *searchResults;
 	QLineEdit *searchBox;
 
 	void search();
+	void clicked(QTreeWidgetItem *item, int column);
 };
 
 

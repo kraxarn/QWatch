@@ -11,6 +11,7 @@
 #include <QFile>
 #include <QApplication>
 #include <QFontDatabase>
+#include <QMessageBox>
 
 class MainWindow : public QMainWindow
 {
@@ -24,4 +25,9 @@ private:
 	QVideoWidget *videoWidget;
 
 	Footer *footer;
+
+	void playMedia(const QString &videoUrl, const QString &audioUrl);
+
+	void playerError(QMediaPlayer::Error error);
+	void playerPosition(quint64 position);
 };

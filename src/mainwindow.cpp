@@ -22,13 +22,66 @@ MainWindow::MainWindow(QWidget *parent)
 	mediaPlayer = new QMediaPlayer(this);
 	videoWidget = new QVideoWidget(this);
 
+	QMediaPlayer::connect(mediaPlayer, QOverload<QMediaPlayer::Error>::of(&QMediaPlayer::error),
+		this, &MainWindow::playerError);
+	QMediaPlayer::connect(mediaPlayer, &QMediaPlayer::positionChanged, this, &MainWindow::playerPosition);
+
 	// Footer
 	footer = new Footer(this);
 	addToolBar(Qt::BottomToolBarArea, footer);
 
 	// Sidebar
-	addDockWidget(Qt::RightDockWidgetArea, new ContextWindow(this));
+	auto contextWindow = new ContextWindow(this);
+	addDockWidget(Qt::RightDockWidgetArea, contextWindow);
+	ContextWindow::connect(contextWindow, &ContextWindow::playMedia, this, &MainWindow::playMedia);
 
 	// Finish setup
 	setCentralWidget(videoWidget);
+}
+
+void MainWindow::playMedia(const QString &videoUrl, const QString &audioUrl)
+{
+	qDebug() << "play:" << videoUrl;
+	mediaPlayer->setMedia(QUrl(videoUrl));
+	mediaPlayer->play();
+}
+
+void MainWindow::playerError(QMediaPlayer::Error error)
+{
+	QString errorMsg;
+
+	switch (error)
+	{
+		case QMediaPlayer::ResourceError:
+			errorMsg = "Failed to resolve media";
+			break;
+
+		case QMediaPlayer::FormatError:
+			errorMsg = "Media codec isn't supported";
+			break;
+
+		case QMediaPlayer::NetworkError:
+			errorMsg = "Network error";
+			break;
+
+		case QMediaPlayer::AccessDeniedError:
+			errorMsg = "Permission denied";
+			break;
+
+		case QMediaPlayer::ServiceMissingError:
+			errorMsg = "Valid playback service not found";
+			break;
+
+		default:
+			errorMsg = "Unknown error";
+			break;
+	}
+
+
+	QMessageBox::warning(this, "Player error", errorMsg);
+}
+
+void MainWindow::playerPosition(quint64 position)
+{
+	qDebug() << position;
 }
