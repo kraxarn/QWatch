@@ -31,20 +31,21 @@ QPixmap NetworkManager::getThumbnail(const QString &id)
 {
 	auto tempFilePath = QString("%1/thumbnails/%2.jpg").arg(cachePath).arg(id);
 	QFile tempFile(tempFilePath);
-	QByteArray data;
+	QPixmap image;
 
 	if (QFileInfo::exists(tempFilePath))
 	{
 		tempFile.open(QIODevice::ReadOnly);
-		data = tempFile.readAll();
+		image.loadFromData(tempFile.readAll(), "jpeg");
 	}
 	else
 	{
-		data = get(QString("https://i.ytimg.com/vi/%1/hqdefault.jpg").arg(id));
+		auto data = get(QString("https://i.ytimg.com/vi/%1/hqdefault.jpg").arg(id));
 		tempFile.open(QIODevice::WriteOnly);
 		tempFile.write(data);
+		image.loadFromData(data, "jpeg");
 	}
 
 	tempFile.close();
-	return QPixmap(data);
+	return image;
 }
