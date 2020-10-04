@@ -10,6 +10,8 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QTreeWidget>
+#include <QIcon>
+#include <QPixmap>
 
 class ContextWindow: public QDockWidget
 {

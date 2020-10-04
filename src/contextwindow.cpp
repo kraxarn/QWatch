@@ -25,16 +25,18 @@ void ContextWindow::search()
 {
 	searchBox->setDisabled(true);
 	searchResults->setDisabled(true);
-	auto json = networkManager->get(QString("yt/search?q=%1").arg(searchBox->text()));
+	auto json = networkManager->getJson(QString("yt/search?q=%1").arg(searchBox->text()));
 
 	searchResults->clear();
 	QJsonObject obj;
 	for (auto item : json.array())
 	{
 		obj = item.toObject();
-		auto listItem = new QTreeWidgetItem(searchResults, {
-			"", obj["title"].toString(), "<author>"
+		auto treeItem = new QTreeWidgetItem(searchResults, {
+			"", obj["title"].toString(), obj["author"].toString()
 		});
+		treeItem->setIcon(0,
+			QIcon(networkManager->getThumbnail(obj["id"].toString())));
 	}
 
 	searchBox->setDisabled(false);
