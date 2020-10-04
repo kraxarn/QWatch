@@ -7,5 +7,16 @@
         <!-- Custom style -->
         <file>res/style/Dark.qss</file>
         <file>res/font/NotoSans-Regular.ttf</file>
+        <file>res/font/NotoSansMono-Regular.ttf</file>
+        <!-- Icons -->
+        <file>res/ic/audio-volume-high.svg</file>
+        <file>res/ic/audio-volume-low.svg</file>
+        <file>res/ic/audio-volume-medium.svg</file>
+        <file>res/ic/audio-volume-muted.svg</file>
+        <file>res/ic/media-playback-pause.svg</file>
+        <file>res/ic/media-playback-start.svg</file>
+        <file>res/ic/media-playback-stop.svg</file>
+        <file>res/ic/media-skip-backward.svg</file>
+        <file>res/ic/media-skip-forward.svg</file>
     </qresource>
 </RCC>

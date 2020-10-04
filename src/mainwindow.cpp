@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 	// Custom font
 	QFontDatabase::addApplicationFont(":/res/font/NotoSans-Regular.ttf");
-	QApplication::setFont(QFont("Noto Sans Regular", QApplication::font().pointSize()));
+	QFontDatabase::addApplicationFont(":/res/font/NotoSansMono-Regular.ttf");
 
 	// Window properties
 	setWindowIcon(Icon::get("logo:app"));
@@ -21,6 +21,13 @@ MainWindow::MainWindow(QWidget *parent)
 	// Media player stuff
 	mediaPlayer = new QMediaPlayer(this);
 	videoWidget = new QVideoWidget(this);
+
+	// Footer
+	footer = new Footer(this);
+	addToolBar(Qt::BottomToolBarArea, footer);
+
+	// Sidebar
+	addDockWidget(Qt::RightDockWidgetArea, new ContextWindow(this));
 
 	// Finish setup
 	setCentralWidget(videoWidget);
