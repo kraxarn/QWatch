@@ -19,12 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
 	resize(1280, 720);
 
 	// Media player stuff
-	mediaPlayer = new QMediaPlayer(this);
+	video = new QMediaPlayer(this);
 	videoWidget = new QVideoWidget(this);
+	video->setVideoOutput(videoWidget);
 
-	QMediaPlayer::connect(mediaPlayer, QOverload<QMediaPlayer::Error>::of(&QMediaPlayer::error),
+	QMediaPlayer::connect(video, QOverload<QMediaPlayer::Error>::of(&QMediaPlayer::error),
 		this, &MainWindow::playerError);
-	QMediaPlayer::connect(mediaPlayer, &QMediaPlayer::positionChanged, this, &MainWindow::playerPosition);
 
 	// Footer
 	footer = new Footer(this);
@@ -41,9 +41,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::playMedia(const QString &videoUrl, const QString &audioUrl)
 {
-	qDebug() << "play:" << videoUrl;
-	mediaPlayer->setMedia(QUrl(videoUrl));
-	mediaPlayer->play();
+	video->setMedia(QUrl(videoUrl));
+	video->play();
 }
 
 void MainWindow::playerError(QMediaPlayer::Error error)
@@ -79,9 +78,4 @@ void MainWindow::playerError(QMediaPlayer::Error error)
 
 
 	QMessageBox::warning(this, "Player error", errorMsg);
-}
-
-void MainWindow::playerPosition(quint64 position)
-{
-	qDebug() << position;
 }

@@ -21,7 +21,7 @@ public:
 	explicit MainWindow(QWidget *parent = nullptr);
 
 private:
-	QMediaPlayer *mediaPlayer;
+	QMediaPlayer *video;
 	QVideoWidget *videoWidget;
 
 	Footer *footer;
