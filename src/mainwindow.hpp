@@ -22,6 +22,7 @@ public:
 
 private:
 	QMediaPlayer *video;
+	QMediaPlayer *audio;
 	QVideoWidget *videoWidget;
 
 	Footer *footer;

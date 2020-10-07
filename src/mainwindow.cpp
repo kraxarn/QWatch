@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 	video = new QMediaPlayer(this);
 	videoWidget = new QVideoWidget(this);
 	video->setVideoOutput(videoWidget);
+	audio = new QMediaPlayer(this);
 
 	QMediaPlayer::connect(video, QOverload<QMediaPlayer::Error>::of(&QMediaPlayer::error),
 		this, &MainWindow::playerError);
@@ -29,6 +30,11 @@ MainWindow::MainWindow(QWidget *parent)
 	// Footer
 	footer = new Footer(this);
 	addToolBar(Qt::BottomToolBarArea, footer);
+
+	Footer::connect(footer, &Footer::volumeChanged, [this](int volume)
+	{
+		this->audio->setVolume(volume);
+	});
 
 	// Sidebar
 	auto contextWindow = new ContextWindow(this);
@@ -42,7 +48,9 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::playMedia(const QString &videoUrl, const QString &audioUrl)
 {
 	video->setMedia(QUrl(videoUrl));
+	audio->setMedia(QUrl(audioUrl));
 	video->play();
+	audio->play();
 }
 
 void MainWindow::playerError(QMediaPlayer::Error error)

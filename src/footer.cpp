@@ -66,6 +66,12 @@ QWidget *Footer::volumeControl()
 	slider->setMaximum(20);
 	slider->setValue(20);
 	slider->setMaximumWidth(200);
+	QSlider::connect(slider, &QSlider::valueChanged, this, &Footer::volumeValueChanged);
 	return slider;
+}
+
+void Footer::volumeValueChanged(int value)
+{
+	emit volumeChanged(value * 5);
 }
 

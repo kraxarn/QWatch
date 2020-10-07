@@ -16,11 +16,16 @@ Q_OBJECT
 public:
 	explicit Footer(QWidget *parent);
 
+signals:
+	void volumeChanged(int volume);
+
 private:
 	QWidget *progressSlider();
 	QWidget *mediaControls();
 	QWidget *volumeControl();
 	QToolButton *toolButton(const QString &icon);
+
+	void volumeValueChanged(int value);
 
 	// Progress
 	QSlider *progress;
