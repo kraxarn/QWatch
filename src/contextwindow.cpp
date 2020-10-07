@@ -27,7 +27,7 @@ void ContextWindow::search()
 {
 	searchBox->setDisabled(true);
 	searchResults->setDisabled(true);
-	auto json = networkManager->getJson(QString("yt/search?q=%1").arg(searchBox->text()));
+	auto json = networkManager->getJson(QUrl(QString("yt/search?q=%1").arg(searchBox->text())).toEncoded());
 
 	searchResults->clear();
 	QJsonObject obj;
