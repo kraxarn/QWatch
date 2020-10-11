@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QApplication>
+#include <QSizePolicy>
 
 #include <phonon/Global>
 #include <phonon/AudioOutput>
@@ -11,7 +12,7 @@
 #include <phonon/VideoWidget>
 #include <phonon/VolumeSlider>
 
-class VideoPlayer: public QWidget
+class VideoPlayer: public Phonon::VideoWidget
 {
 Q_OBJECT
 
@@ -20,9 +21,6 @@ public:
 
 	bool load(const QString &videoUri, const QString &audioUri);
 	void setVolume(int volume);
-
-	Phonon::SeekSlider *getSeekSlider();
-	Phonon::VolumeSlider *getVolumeSlider();
 
 signals:
 	void error(const QString &message, const QString &details);
@@ -34,5 +32,4 @@ private:
 	Phonon::MediaObject *mediaAudio = nullptr;
 
 	Phonon::AudioOutput *audio = nullptr;
-	Phonon::VideoWidget *video = nullptr;
 };
