@@ -13,12 +13,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Qt
 find_package(Qt5 COMPONENTS Widgets Network Svg REQUIRED)
-
 # KDE
 find_package(Phonon4Qt5 REQUIRED)
 
 file(GLOB MAIN_SRC "src/*.[hc]pp")
-
 add_executable(QWatch ${MAIN_SRC} res.qrc)
 
 # Don't show console window under windows
