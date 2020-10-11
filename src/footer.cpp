@@ -35,7 +35,7 @@ QWidget *Footer::mediaControls()
 {
 	auto layout = new QToolBar();
 
-	playPause = layout->addAction(Icon::get("media-playback-start"), "Play/Pause");
+	playPause = layout->addAction(Icon::get("media-playback-start"), "Play");
 
 	layout->addSeparator();
 	layout->addAction(Icon::get("media-skip-backward"), "Previous");
@@ -73,5 +73,23 @@ QWidget *Footer::volumeControl()
 void Footer::volumeValueChanged(int value)
 {
 	emit volumeChanged(value * 5);
+}
+
+void Footer::setDuration(qint64 time)
+{
+	currentLength->setText(Utils::formatTime(time));
+	progress->setMaximum((int) (time / 60));
+}
+
+void Footer::setPosition(qint64 time)
+{
+	currentTimestamp->setText(Utils::formatTime(time));
+	progress->setValue((int) (time / 60));
+}
+
+void Footer::setPlaying(bool playing)
+{
+	playPause->setIcon(Icon::get(QString("media-playback-%1").arg(playing ? "pause" : "start")));
+	playPause->setText(playing ? "Pause" : "Play");
 }
 

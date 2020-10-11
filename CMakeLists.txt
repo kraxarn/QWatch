@@ -11,7 +11,11 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Widgets Network Svg Multimedia MultimediaWidgets REQUIRED)
+# Qt
+find_package(Qt5 COMPONENTS Widgets Network Svg REQUIRED)
+
+# KDE
+find_package(Phonon4Qt5 REQUIRED)
 
 file(GLOB MAIN_SRC "src/*.[hc]pp")
 
@@ -22,4 +26,8 @@ if (WIN32)
 	target_link_options(QWatch PRIVATE -mwindows)
 endif ()
 
-target_link_libraries(QWatch PRIVATE Qt5::Widgets Qt5::Network Qt5::Svg Qt5::Multimedia Qt5::MultimediaWidgets)
+target_link_libraries(QWatch PRIVATE
+		Qt5::Widgets
+		Qt5::Network
+		Qt5::Svg
+		Phonon::${PHONON_LIB_SONAME})

@@ -2,6 +2,7 @@
 
 #include "utils.hpp"
 #include "networkmanager.hpp"
+#include "mediainformation.hpp"
 
 #include <QDockWidget>
 #include <QLineEdit>
@@ -21,7 +22,7 @@ public:
 	explicit ContextWindow(QWidget *parent);
 
 signals:
-	void playMedia(const QString &videoUrl, const QString &audioUrl);
+	void playMedia(const MediaInformation &info);
 
 private:
 	NetworkManager *networkManager;

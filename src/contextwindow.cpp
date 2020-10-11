@@ -51,8 +51,12 @@ void ContextWindow::clicked(QTreeWidgetItem *item, int)
 	auto json = networkManager->getJson(QString("yt/info/%1")
 		.arg(item->data(0, 0x100).toString())).object();
 
-	auto videoUrl = json["video"].toObject()["url"].toString();
-	auto audioUrl = json["audio"].toObject()["url"].toString();
+	auto video = json["video"].toObject();
 
-	emit playMedia(videoUrl, audioUrl);
+	MediaInformation info;
+	info.videoUrl = video["url"].toString();
+	info.audioUrl = json["audio"].toObject()["url"].toString();
+	info.duration = video["duration"].toString().toLongLong();
+
+	emit playMedia(info);
 }

@@ -2,6 +2,7 @@
 
 #include "font.hpp"
 #include "icon.hpp"
+#include "utils.hpp"
 
 #include <QToolBar>
 #include <QVBoxLayout>
@@ -15,6 +16,10 @@ Q_OBJECT
 
 public:
 	explicit Footer(QWidget *parent);
+
+	void setDuration(qint64 time);
+	void setPosition(qint64 time);
+	void setPlaying(bool playing);
 
 signals:
 	void volumeChanged(int volume);

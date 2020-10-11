@@ -4,6 +4,9 @@
 #include "footer.hpp"
 #include "font.hpp"
 #include "contextwindow.hpp"
+#include "videoplayer.hpp"
+#include "errordialog.hpp"
+#include "mediainformation.hpp"
 
 #include <QMainWindow>
 #include <QMediaPlayer>
@@ -13,22 +16,20 @@
 #include <QFontDatabase>
 #include <QMessageBox>
 
-class MainWindow : public QMainWindow
+class MainWindow: public QMainWindow
 {
-	Q_OBJECT
+Q_OBJECT
 
 public:
 	explicit MainWindow(QWidget *parent = nullptr);
 
 private:
-	QMediaPlayer *video;
-	QMediaPlayer *audio;
-	QVideoWidget *videoWidget;
-
+	VideoPlayer *videoPlayer;
 	Footer *footer;
 
-	void playMedia(const QString &videoUrl, const QString &audioUrl);
+	void playMedia(const MediaInformation &info);
+	void showError(const QString &message, const QString &details);
 
-	void playerError(QMediaPlayer::Error error);
-	void playerPosition(quint64 position);
+	void positionChanged(qint64 position);
+	void playerStateChanged(Phonon::State state);
 };
