@@ -47,6 +47,9 @@ void MainWindow::playMedia(const MediaInformation &info)
 {
 	videoPlayer->load(info.videoUrl, info.audioUrl);
 	footer->setDuration(info.duration);
+
+	if (!info.title.isEmpty())
+		setWindowTitle(info.title);
 }
 
 void MainWindow::showError(const QString &message, const QString &details)

@@ -58,6 +58,7 @@ void ContextWindow::clicked(QTreeWidgetItem *item, int)
 	info.videoUrl = video["url"].toString();
 	info.audioUrl = json["audio"].toObject()["url"].toString();
 	info.duration = video["duration"].toString().toLongLong();
+	info.title = json["title"].toString();
 
 	emit playMedia(info);
 }
