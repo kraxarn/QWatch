@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
 	// Footer
 	footer = new Footer(this);
 	addToolBar(Qt::BottomToolBarArea, footer);
-	Footer::connect(footer, &Footer::volumeChanged, videoPlayer, &VideoPlayer::setVolume);
 
 	// Finish setup
 	createLayout();
@@ -34,6 +33,7 @@ void MainWindow::createLayout()
 	VideoPlayer::connect(videoPlayer, &VideoPlayer::error, this, &MainWindow::showError);
 	VideoPlayer::connect(videoPlayer, &VideoPlayer::positionChanged, this, &MainWindow::positionChanged);
 	VideoPlayer::connect(videoPlayer, &VideoPlayer::stateChanged, this, &MainWindow::playerStateChanged);
+	Footer::connect(footer, &Footer::volumeChanged, videoPlayer, &VideoPlayer::setVolume);
 	splitter->addWidget(videoPlayer);
 
 	auto contextWindow = new ContextWindow(this);
