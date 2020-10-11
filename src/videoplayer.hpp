@@ -1,9 +1,5 @@
 #pragma once
 
-#include <gst/gst.h>
-#include <gst/video/videooverlay.h>
-
-#include <QVideoWidget>
 #include <QDebug>
 #include <QApplication>
 

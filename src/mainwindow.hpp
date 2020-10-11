@@ -9,8 +9,6 @@
 #include "mediainformation.hpp"
 
 #include <QMainWindow>
-#include <QMediaPlayer>
-#include <QVideoWidget>
 #include <QFile>
 #include <QApplication>
 #include <QFontDatabase>
