@@ -4,7 +4,6 @@
 #include "networkmanager.hpp"
 #include "mediainformation.hpp"
 
-#include <QDockWidget>
 #include <QLineEdit>
 #include <QVBoxLayout>
 #include <QListWidget>
@@ -14,7 +13,7 @@
 #include <QIcon>
 #include <QPixmap>
 
-class ContextWindow: public QDockWidget
+class ContextWindow: public QWidget
 {
 Q_OBJECT
 

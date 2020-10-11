@@ -13,6 +13,7 @@
 #include <QApplication>
 #include <QFontDatabase>
 #include <QMessageBox>
+#include <QSplitter>
 
 class MainWindow: public QMainWindow
 {
@@ -27,6 +28,7 @@ private:
 
 	void playMedia(const MediaInformation &info);
 	void showError(const QString &message, const QString &details);
+	void createLayout();
 
 	void positionChanged(qint64 position);
 	void playerStateChanged(Phonon::State state);

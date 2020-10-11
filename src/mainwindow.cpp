@@ -16,26 +16,32 @@ MainWindow::MainWindow(QWidget *parent)
 
 	// Window properties
 	setWindowIcon(Icon::get("logo:app"));
-	resize(1280, 720);
-
-	// Media player stuff
-	videoPlayer = new VideoPlayer(this);
-	VideoPlayer::connect(videoPlayer, &VideoPlayer::error, this, &MainWindow::showError);
-	VideoPlayer::connect(videoPlayer, &VideoPlayer::positionChanged, this, &MainWindow::positionChanged);
-	VideoPlayer::connect(videoPlayer, &VideoPlayer::stateChanged, this, &MainWindow::playerStateChanged);
+	resize(1280, 620);
 
 	// Footer
 	footer = new Footer(this);
 	addToolBar(Qt::BottomToolBarArea, footer);
 	Footer::connect(footer, &Footer::volumeChanged, videoPlayer, &VideoPlayer::setVolume);
 
-	// Sidebar
-	auto contextWindow = new ContextWindow(this);
-	addDockWidget(Qt::RightDockWidgetArea, contextWindow);
-	ContextWindow::connect(contextWindow, &ContextWindow::playMedia, this, &MainWindow::playMedia);
-
 	// Finish setup
-	setCentralWidget(videoPlayer);
+	createLayout();
+}
+
+void MainWindow::createLayout()
+{
+	auto splitter = new QSplitter(Qt::Orientation::Horizontal, this);
+
+	videoPlayer = new VideoPlayer(this);
+	VideoPlayer::connect(videoPlayer, &VideoPlayer::error, this, &MainWindow::showError);
+	VideoPlayer::connect(videoPlayer, &VideoPlayer::positionChanged, this, &MainWindow::positionChanged);
+	VideoPlayer::connect(videoPlayer, &VideoPlayer::stateChanged, this, &MainWindow::playerStateChanged);
+	splitter->addWidget(videoPlayer);
+
+	auto contextWindow = new ContextWindow(this);
+	ContextWindow::connect(contextWindow, &ContextWindow::playMedia, this, &MainWindow::playMedia);
+	splitter->addWidget(contextWindow);
+
+	setCentralWidget(splitter);
 }
 
 void MainWindow::playMedia(const MediaInformation &info)

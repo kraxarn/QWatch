@@ -1,7 +1,7 @@
 #include "contextwindow.hpp"
 
 ContextWindow::ContextWindow(QWidget *parent)
-	: QDockWidget(parent)
+	: QWidget(parent)
 {
 	networkManager = new NetworkManager(this);
 
@@ -20,7 +20,8 @@ ContextWindow::ContextWindow(QWidget *parent)
 
 	QTreeWidget::connect(searchResults, &QTreeWidget::itemDoubleClicked, this, &ContextWindow::clicked);
 
-	setWidget(Utils::layoutToWidget(layout));
+	setMaximumWidth(350);
+	setLayout(layout);
 }
 
 void ContextWindow::search()
