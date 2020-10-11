@@ -2,7 +2,15 @@
 
 #include <QString>
 
-typedef struct {
-	QString videoUrl, audioUrl, videoType, audioType;
+typedef struct
+{
+	QString title;
+
+	QString videoUrl;
+	QString audioUrl;
+
+	QString videoType;
+	QString audioType;
+
 	qint64 duration;
 } MediaInformation;

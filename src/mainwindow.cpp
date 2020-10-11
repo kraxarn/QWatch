@@ -6,7 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
 	// Custom dark theme
 	QFile styleFile(":/res/style/Dark.qss");
 	styleFile.open(QIODevice::ReadOnly);
-	QApplication::setStyle("fusion");
 	setStyleSheet(styleFile.readAll());
 	styleFile.close();
 
