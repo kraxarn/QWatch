@@ -3,6 +3,8 @@
 Footer::Footer(QWidget *parent)
 	: QToolBar(parent)
 {
+	setMovable(false);
+
 	auto layout = new QVBoxLayout();
 	layout->addWidget(mediaControls());
 
@@ -16,14 +18,16 @@ QWidget *Footer::progressSlider()
 	auto layout = new QHBoxLayout();
 
 	currentTimestamp = new QLabel("00:00", this);
-	currentTimestamp->setFont(Font::monospace());
+	currentTimestamp->setMinimumWidth(40);
+	currentTimestamp->setAlignment(Qt::AlignRight);
 	layout->addWidget(currentTimestamp, 0, Qt::AlignRight);
 
 	progress = new QSlider(Qt::Horizontal, this);
 	layout->addWidget(progress, 1);
 
 	currentLength = new QLabel("00:00", this);
-	currentLength->setFont(Font::monospace());
+	currentLength->setMinimumWidth(40);
+	currentLength->setAlignment(Qt::AlignLeft);
 	layout->addWidget(currentLength, 0, Qt::AlignLeft);
 
 	auto layoutWidget = new QWidget(this);
